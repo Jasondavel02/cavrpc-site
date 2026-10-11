@@ -1,0 +1,192 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Small Bore Rifle Silhouette — Matches</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Public+Sans:wght@400;500;600;700&family=Spline+Sans+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f1efe2; --surface:#fbf9f0; --surface-2:#e7e0c7; --fg:#201f16; --muted:#5e5742;
+  --line:#d6cdac; --accent:#8f5f18; --accent-ink:#fbf4e3; --pine:#243a29; --pine-ink:#edf1e6;
+  --shadow:0 1px 2px rgba(32,31,22,.08);
+  --font-display:'Fraunces','Iowan Old Style',serif; --font-body:'Public Sans',system-ui,-apple-system,sans-serif; --font-mono:'Spline Sans Mono','SFMono-Regular',monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#11150d; --surface:#191f13; --surface-2:#212919; --fg:#e9e3cf; --muted:#a19b84;
+    --line:#333b26; --accent:#d9a54a; --accent-ink:#1a1407; --pine:#75966f; --pine-ink:#0e140d;
+    --shadow:0 1px 2px rgba(0,0,0,.4); color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#11150d; --surface:#191f13; --surface-2:#212919; --fg:#e9e3cf; --muted:#a19b84;
+  --line:#333b26; --accent:#d9a54a; --accent-ink:#1a1407; --pine:#75966f; --pine-ink:#0e140d;
+  --shadow:0 1px 2px rgba(0,0,0,.4); color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font-body);line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+img{max-width:100%;display:block}
+.wrap{max-width:1120px;margin-inline:auto;padding-inline:clamp(20px,4vw,32px)}
+h1,h2,h3{font-family:var(--font-display);font-weight:600;line-height:1.08;text-wrap:balance;margin:0}
+h1{font-size:clamp(2rem,4.6vw,3.2rem);font-style:italic;font-weight:500}
+h2{font-size:clamp(1.5rem,3vw,2.1rem)}
+h3{font-size:1.1rem}
+p{margin:0}
+.eyebrow{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600}
+.muted{color:var(--muted)}
+.lede{font-size:1.1rem;max-width:62ch;color:var(--muted)}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-body);font-weight:600;font-size:.95rem;padding:.75em 1.3em;border-radius:3px;border:1px solid transparent;text-decoration:none;transition:transform .15s ease}
+.btn-solid{background:var(--accent);color:var(--accent-ink)}
+.btn-line{border-color:var(--line);color:var(--fg)}
+.btn:hover{transform:translateY(-1px)}
+.cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}
+.site-header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--bg);border-bottom:1px solid var(--line)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-block:14px}
+.brand{display:flex;align-items:baseline;gap:10px;text-decoration:none;color:var(--fg)}
+.brand b{font-family:var(--font-display);font-style:italic;font-size:1.3rem;font-weight:600;white-space:nowrap}
+.brand span{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.1em;color:var(--accent);white-space:nowrap}
+nav.primary{display:flex;align-items:center;gap:26px}
+nav.primary a{text-decoration:none;font-size:.93rem;font-weight:500;color:var(--muted);padding-block:4px;border-bottom:2px solid transparent}
+nav.primary a:hover,nav.primary a[aria-current="page"]{color:var(--fg);border-color:var(--accent)}
+.members-pill{border:1px solid var(--line);border-radius:999px;padding:.4em 1em;font-size:.85rem;font-weight:600;text-decoration:none;white-space:nowrap}
+.nav-toggle{display:none}
+.nav-toggle summary{list-style:none;cursor:pointer;border:1px solid var(--line);border-radius:4px;padding:.4em .7em;font-family:var(--font-mono);font-size:.8rem}
+.nav-toggle summary::-webkit-details-marker{display:none}
+section{padding-block:clamp(40px,6vw,76px)}
+.hero{padding-top:clamp(48px,8vw,88px);padding-bottom:28px}
+.hero-grid{display:grid;gap:22px;max-width:50rem}
+.band{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+footer{background:var(--pine);color:var(--pine-ink)}
+footer .wrap{padding-block:48px;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:32px}
+footer a{text-decoration:none;color:var(--pine-ink);opacity:.85}
+footer a:hover{opacity:1}
+footer h4{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;opacity:.75;margin:0 0 12px}
+footer .legal{border-top:1px solid rgba(255,255,255,.15);padding-block:18px;font-size:.8rem;opacity:.7}
+.footer-links{display:grid;gap:8px;padding:0;margin:0;list-style:none;font-size:.92rem}
+@media (max-width:860px){
+  nav.primary{display:none} .members-pill{display:none} .nav-toggle{display:block}
+  .nav-toggle[open] .panel{display:flex}
+  .panel{display:none;position:absolute;left:0;right:0;top:100%;background:var(--bg);border-bottom:1px solid var(--line);flex-direction:column;padding:16px clamp(20px,4vw,32px) 24px;gap:16px}
+  .panel a{text-decoration:none;color:var(--fg);font-weight:500}
+  footer .wrap{grid-template-columns:1fr;gap:28px}
+}
+.breadcrumb{font-family:var(--font-mono);font-size:.78rem;color:var(--muted);display:block;margin-bottom:4px;text-decoration:none}
+.breadcrumb a{color:var(--accent);text-decoration:none}
+.pill{font-family:var(--font-mono);font-size:.72rem;border:1px solid var(--line);border-radius:999px;padding:.3em .8em;background:var(--surface-2);white-space:nowrap;display:inline-block}
+.pill-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.fact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:4px;overflow:hidden;margin-top:12px}
+.fact-grid .f{background:var(--surface);padding:18px 20px}
+.fact-grid .f .k{display:block;font-family:var(--font-mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+.fact-grid .f .v{font-size:.95rem;font-weight:600}
+.rule-list{display:grid;gap:10px;margin-top:16px;padding:0;list-style:none}
+.rule-list li{padding-left:20px;position:relative;color:var(--muted);font-size:.95rem}
+.rule-list li::before{content:"—";position:absolute;left:0;color:var(--accent)}
+.stage-list{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:4px;overflow:hidden;margin-top:16px}
+.stage{background:var(--surface);padding:14px 20px;display:flex;gap:16px;align-items:baseline;flex-wrap:wrap}
+.stage .sn{font-family:var(--font-mono);color:var(--accent);font-weight:600;min-width:26px}
+.contact-card{background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:22px}
+.contact-card + .contact-card{margin-top:14px}
+.contact-card .ct{display:block;margin-top:4px;font-family:var(--font-mono);font-size:.88rem}
+.contact-card .ct a{color:var(--accent);text-decoration:none}
+.notice{background:var(--surface-2);border:1px solid var(--line);border-radius:4px;padding:14px 18px;font-size:.85rem;color:var(--muted);margin-top:20px}
+.two-col{display:grid;grid-template-columns:1.3fr .9fr;gap:40px;align-items:start}
+@media (max-width:860px){.two-col{grid-template-columns:1fr}}
+</style></head><body>
+
+<header class="site-header">
+  <div class="wrap nav-inner" style="position:relative">
+    <a class="brand" href="index.html"><b>Cavalier Rifle &amp; Pistol Club</b><span>EST. 1937</span></a>
+    <nav class="primary" aria-label="Primary">
+      <a href="facilities.html">Facilities</a>
+      <a href="membership.html">Membership</a>
+      <a href="matches.html" aria-current="page">Matches</a>
+      <a href="events.html">Events</a>
+      <a href="directions.html">Directions</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <a class="members-pill" href="members-only.html">Members Only</a>
+    <details class="nav-toggle">
+      <summary>Menu</summary>
+      <div class="panel">
+        <a href="facilities.html">Facilities</a>
+        <a href="membership.html">Membership</a>
+        <a href="matches.html">Matches</a>
+        <a href="events.html">Events</a>
+        <a href="directions.html">Directions</a>
+        <a href="contact.html">Contact</a>
+        <a href="members-only.html">Members Only</a>
+      </div>
+    </details>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <a class="breadcrumb" href="matches.html">← All matches</a>
+      <p class="eyebrow">Public Match · NRA Rules</p>
+      <h1>Small Bore Rifle Silhouette</h1>
+      <p class="lede">A monthly smallbore silhouette tournament on Range 2, open to members and the public, with separate Standard and Hunting rifle classes.</p>
+      <div class="fact-grid">
+        <div class="f"><span class="k">Range</span><span class="v">Range 2</span></div>
+        <div class="f"><span class="k">Schedule</span><span class="v">3rd Saturday, monthly</span></div>
+        <div class="f"><span class="k">Check-in</span><span class="v">Sight-in 1:00pm · competition 1:30pm</span></div>
+        <div class="f"><span class="k">Fee</span><span class="v">$10 (under 21 free)</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap two-col">
+      <div>
+        <h2>Course of fire</h2>
+        <p class="muted" style="margin-top:8px">40 shots per match. Standard and Hunting rifle classes are shot as two separate 40-shot matches — shooting both with one rifle means shooting it twice.</p>
+        <h2 style="margin-top:36px">Rules &amp; equipment</h2>
+        <ul class="rule-list">
+          <li>NRA rules plus club safety rules; open bolt indicators required off the firing line.</li>
+          <li>NRA Standard/Approved 1/5 targets, distances measured in meters.</li>
+          <li>Entries close at 1:15pm on match day — arrive early.</li>
+          <li>An NRA "10-in-a-row" pin is awarded for a competitor's first ten consecutive hits on a given rifle/animal combination; results are submitted to the NRA for Grand Slam purposes.</li>
+        </ul>
+        <div class="notice">Open to both club members and the public.</div>
+      </div>
+      <div>
+        <h2>Contact</h2>
+        <div class="contact-card">
+          <strong>Noah Jessee</strong>
+          <span class="ct"><a href="tel:+18048375288">(804) 837-5288</a></span>
+          <span class="ct"><a href="mailto:noah.jessee@verizon.net">noah.jessee@verizon.net</a></span>
+        </div>
+        <div class="cta-row"><a class="btn btn-line" href="matches.html">Back to all matches</a></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <h4>Cavalier Rifle and Pistol Club</h4>
+      <p style="max-width:32ch;opacity:.9">14151 Boondock Ln<br>Montpelier, VA 23192</p>
+      <p style="margin-top:14px;font-family:var(--font-mono);font-size:.8rem;opacity:.75">Incorporated since 1937 · NRA Affiliate No. 323</p>
+    </div>
+    <div>
+      <h4>Visit</h4>
+      <ul class="footer-links">
+        <li><a href="facilities.html">Facilities</a></li>
+        <li><a href="directions.html">Directions</a></li>
+        <li><a href="membership.html">Membership</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Shoot</h4>
+      <ul class="footer-links">
+        <li><a href="matches.html">Matches</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="contact.html">Contact us</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap legal">© Cavalier Rifle and Pistol Club. Incorporated 1937.</div>
+</footer>
+</body></html>
