@@ -1,0 +1,298 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Events Calendar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Public+Sans:wght@400;500;600;700&family=Spline+Sans+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f1efe2; --surface:#fbf9f0; --surface-2:#e7e0c7; --fg:#201f16; --muted:#5e5742;
+  --line:#d6cdac; --accent:#8f5f18; --accent-ink:#fbf4e3; --pine:#243a29; --pine-ink:#edf1e6;
+  --shadow:0 1px 2px rgba(32,31,22,.08);
+  --font-display:'Fraunces','Iowan Old Style',serif; --font-body:'Public Sans',system-ui,-apple-system,sans-serif; --font-mono:'Spline Sans Mono','SFMono-Regular',monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#11150d; --surface:#191f13; --surface-2:#212919; --fg:#e9e3cf; --muted:#a19b84;
+    --line:#333b26; --accent:#d9a54a; --accent-ink:#1a1407; --pine:#75966f; --pine-ink:#0e140d;
+    --shadow:0 1px 2px rgba(0,0,0,.4); color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#11150d; --surface:#191f13; --surface-2:#212919; --fg:#e9e3cf; --muted:#a19b84;
+  --line:#333b26; --accent:#d9a54a; --accent-ink:#1a1407; --pine:#75966f; --pine-ink:#0e140d;
+  --shadow:0 1px 2px rgba(0,0,0,.4); color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font-body);line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+img{max-width:100%;display:block}
+.wrap{max-width:1120px;margin-inline:auto;padding-inline:clamp(20px,4vw,32px)}
+h1,h2,h3{font-family:var(--font-display);font-weight:600;line-height:1.08;text-wrap:balance;margin:0}
+h1{font-size:clamp(2.2rem,5vw,3.6rem);font-style:italic;font-weight:500}
+h2{font-size:clamp(1.6rem,3.2vw,2.3rem)}
+h3{font-size:1.1rem}
+p{margin:0}
+.eyebrow{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600}
+.muted{color:var(--muted)}
+.lede{font-size:1.15rem;max-width:62ch;color:var(--muted)}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-body);font-weight:600;font-size:.95rem;padding:.75em 1.3em;border-radius:3px;border:1px solid transparent;text-decoration:none;transition:transform .15s ease}
+.btn-solid{background:var(--accent);color:var(--accent-ink)}
+.btn-line{border-color:var(--line);color:var(--fg)}
+.btn:hover{transform:translateY(-1px)}
+.cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}
+.site-header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--bg);border-bottom:1px solid var(--line)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-block:14px}
+.brand{display:flex;align-items:baseline;gap:10px;text-decoration:none;color:var(--fg)}
+.brand b{font-family:var(--font-display);font-style:italic;font-size:1.3rem;font-weight:600;white-space:nowrap}
+.brand span{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.1em;color:var(--accent);white-space:nowrap}
+nav.primary{display:flex;align-items:center;gap:26px}
+nav.primary a{text-decoration:none;font-size:.93rem;font-weight:500;color:var(--muted);padding-block:4px;border-bottom:2px solid transparent}
+nav.primary a:hover,nav.primary a[aria-current="page"]{color:var(--fg);border-color:var(--accent)}
+.members-pill{border:1px solid var(--line);border-radius:999px;padding:.4em 1em;font-size:.85rem;font-weight:600;text-decoration:none;white-space:nowrap}
+.nav-toggle{display:none}
+.nav-toggle summary{list-style:none;cursor:pointer;border:1px solid var(--line);border-radius:4px;padding:.4em .7em;font-family:var(--font-mono);font-size:.8rem}
+.nav-toggle summary::-webkit-details-marker{display:none}
+section{padding-block:clamp(48px,7vw,88px)}
+.hero{padding-top:clamp(56px,9vw,100px)}
+.hero-grid{display:grid;gap:28px;max-width:46rem}
+.band{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+footer{background:var(--pine);color:var(--pine-ink)}
+footer .wrap{padding-block:48px;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:32px}
+footer a{text-decoration:none;color:var(--pine-ink);opacity:.85}
+footer a:hover{opacity:1}
+footer h4{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;opacity:.75;margin:0 0 12px}
+footer .legal{border-top:1px solid rgba(255,255,255,.15);padding-block:18px;font-size:.8rem;opacity:.7}
+.footer-links{display:grid;gap:8px;padding:0;margin:0;list-style:none;font-size:.92rem}
+@media (max-width:860px){
+  nav.primary{display:none} .members-pill{display:none} .nav-toggle{display:block}
+  .nav-toggle[open] .panel{display:flex}
+  .panel{display:none;position:absolute;left:0;right:0;top:100%;background:var(--bg);border-bottom:1px solid var(--line);flex-direction:column;padding:16px clamp(20px,4vw,32px) 24px;gap:16px}
+  .panel a{text-decoration:none;color:var(--fg);font-weight:500}
+  footer .wrap{grid-template-columns:1fr;gap:28px}
+  .ev-card{flex-wrap:wrap}
+}
+.section-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
+.status-pill{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;border-radius:999px;padding:.35em .9em;border:1px solid var(--line);white-space:nowrap}
+.status-live{border-color:var(--pine);color:var(--pine)}
+.status-snapshot{background:var(--surface-2)}
+.ev-banner{background:var(--surface-2);border:1px solid var(--line);border-radius:4px;padding:16px 22px;display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:32px;flex-wrap:wrap}
+.ev-banner b{font-family:var(--font-display);font-style:italic;font-size:1.05rem}
+.ev-list{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:4px;overflow:hidden;margin-top:16px}
+.ev-card{background:var(--surface);padding:18px 22px;display:flex;gap:20px;align-items:flex-start}
+.ev-date{font-family:var(--font-mono);text-align:center;min-width:58px;line-height:1.05;flex-shrink:0}
+.ev-date .ev-month{display:block;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.ev-date .ev-day{display:block;font-size:1.6rem;font-weight:600}
+.ev-body{min-width:0}
+.ev-body h3{font-size:1.05rem;margin-bottom:3px}
+.ev-time{font-family:var(--font-mono);font-size:.82rem;color:var(--accent)}
+.ev-loc,.ev-contact{font-size:.85rem;color:var(--muted);margin-top:3px}
+.ev-foot{font-size:.82rem;color:var(--muted);margin-top:18px}
+[hidden]{display:none!important}
+</style></head><body>
+
+<header class="site-header">
+  <div class="wrap nav-inner" style="position:relative">
+    <a class="brand" href="index.html"><b>Cavalier Rifle &amp; Pistol Club</b><span>EST. 1937</span></a>
+    <nav class="primary" aria-label="Primary">
+      <a href="facilities.html">Facilities</a>
+      <a href="membership.html">Membership</a>
+      <a href="matches.html">Matches</a>
+      <a href="events.html" aria-current="page">Events</a>
+      <a href="directions.html">Directions</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <a class="members-pill" href="members-only.html">Members Only</a>
+    <details class="nav-toggle">
+      <summary>Menu</summary>
+      <div class="panel">
+        <a href="facilities.html">Facilities</a>
+        <a href="membership.html">Membership</a>
+        <a href="matches.html">Matches</a>
+        <a href="events.html">Events</a>
+        <a href="directions.html">Directions</a>
+        <a href="contact.html">Contact</a>
+        <a href="members-only.html">Members Only</a>
+      </div>
+    </details>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <p class="eyebrow">Plan ahead</p>
+      <h1>What's happening at the club.</h1>
+      <p class="lede">This page syncs with the club's Google Calendar. Range reservations, special matches, and club meetings all land here as they're scheduled.</p>
+      <div class="cta-row">
+        <a class="btn btn-solid" href="https://calendar.google.com/calendar/embed?src=cavrpc%40gmail.com&amp;ctz=America/New_York" target="_blank" rel="noopener">View full calendar</a>
+        <a class="btn btn-line" href="https://calendar.google.com/calendar/u/0/r?cid=cavrpc@gmail.com" target="_blank" rel="noopener">Subscribe</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Next on the calendar</h2>
+        <span class="status-pill status-live" id="statusPill" hidden>● Live from Google Calendar</span>
+        <span class="status-pill status-snapshot" id="statusPillSnap">Snapshot — Oct 2026</span>
+      </div>
+
+      <div class="ev-banner">
+        <div><b>Sporting Clays</b> — open to the public every Sunday, 11:30am–3:00pm</div>
+        <a class="btn btn-line" href="matches.html">Regular match schedule →</a>
+      </div>
+
+      <div id="liveEvents" class="ev-list" hidden></div>
+
+      <div id="fallbackEvents" class="ev-list">
+        <div class="ev-card">
+          <div class="ev-date"><span class="ev-month">Oct</span><span class="ev-day">15</span></div>
+          <div class="ev-body"><h3>Night Shoot — Range 5, 600 yd</h3><p class="ev-time">4:00pm – 8:00pm, after hours</p></div>
+        </div>
+        <div class="ev-card">
+          <div class="ev-date"><span class="ev-month">Oct</span><span class="ev-day">17</span></div>
+          <div class="ev-body"><h3>Rimfire Ram Bash — Range 2</h3><p class="ev-time">Practice 9:00am · Match 9:45am</p><p class="ev-contact">$20 entry, preregister — Neil Davis, (732) 614-3179</p></div>
+        </div>
+        <div class="ev-card">
+          <div class="ev-date"><span class="ev-month">Oct</span><span class="ev-day">17</span></div>
+          <div class="ev-body"><h3>Ladies Event — Range 4</h3><p class="ev-contact">Contact Marty Rudd, (804) 370-3596</p></div>
+        </div>
+        <div class="ev-card">
+          <div class="ev-date"><span class="ev-month">Oct</span><span class="ev-day">23–25</span></div>
+          <div class="ev-body"><h3>Troop 804 — Range 2 &amp; Campground</h3><p class="ev-time">Friday evening through Sunday noon</p></div>
+        </div>
+        <div class="ev-card">
+          <div class="ev-date"><span class="ev-month">Oct</span><span class="ev-day">24</span></div>
+          <div class="ev-body"><h3>USPSA &amp; Conventional High Power Rifle</h3><p class="ev-time">Range 5 Action Bays / Range 5, 600 yd</p><p class="ev-contact">USPSA — Chris &amp; Tess Dye, (804) 307-1469</p></div>
+        </div>
+        <div class="ev-card">
+          <div class="ev-date"><span class="ev-month">Oct</span><span class="ev-day">31</span></div>
+          <div class="ev-body"><h3>Precision Rimfire 22 — Range 5, 600 yd</h3><p class="ev-time">22LR only · targets 30–385 yards</p><p class="ev-contact">Luke Jeter, (804) 519-8245</p></div>
+        </div>
+        <div class="ev-card">
+          <div class="ev-date"><span class="ev-month">Nov</span><span class="ev-day">1</span></div>
+          <div class="ev-body"><h3>Cowboy Action — Range 3</h3></div>
+        </div>
+        <div class="ev-card">
+          <div class="ev-date"><span class="ev-month">Nov</span><span class="ev-day">2</span></div>
+          <div class="ev-body"><h3>MCL Pistol Match — Range 3</h3><p class="ev-time">9:00am – 3:00pm</p></div>
+        </div>
+        <div class="ev-card">
+          <div class="ev-date"><span class="ev-month">Nov</span><span class="ev-day">13</span></div>
+          <div class="ev-body"><h3>IDPA Range Setup — Action Bays</h3><p class="ev-time">Noon – 6:00pm</p></div>
+        </div>
+        <div class="ev-card">
+          <div class="ev-date"><span class="ev-month">Nov</span><span class="ev-day">28</span></div>
+          <div class="ev-body"><h3>USPSA &amp; High Power Rifle</h3><p class="ev-time">Range 5 Action Bays / Range 5, 600 yd</p></div>
+        </div>
+      </div>
+
+      <p class="ev-foot">This list is a snapshot pulled from the club calendar in October 2026. Dates, times, and new events change — the <a href="https://calendar.google.com/calendar/embed?src=cavrpc%40gmail.com&ctz=America/New_York" style="color:var(--accent)" target="_blank" rel="noopener">live calendar</a> is always the source of truth, and this section switches to live updates automatically once a calendar API key is configured (see code comments).</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <h4>Cavalier Rifle and Pistol Club</h4>
+      <p style="max-width:32ch;opacity:.9">14151 Boondock Ln<br>Montpelier, VA 23192</p>
+      <p style="margin-top:14px;font-family:var(--font-mono);font-size:.8rem;opacity:.75">Incorporated since 1937 · NRA Affiliate No. 323</p>
+    </div>
+    <div>
+      <h4>Visit</h4>
+      <ul class="footer-links">
+        <li><a href="facilities.html">Facilities</a></li>
+        <li><a href="directions.html">Directions</a></li>
+        <li><a href="membership.html">Membership</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Shoot</h4>
+      <ul class="footer-links">
+        <li><a href="matches.html">Matches</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="contact.html">Contact us</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap legal">© Cavalier Rifle and Pistol Club. Incorporated 1937.</div>
+</footer>
+
+<script>
+/*
+ * LIVE CALENDAR SYNC
+ * This page can pull events directly from the club's public Google Calendar
+ * (cavrpc@gmail.com) at run time — no backend required. To turn it on:
+ *
+ *   1. In Google Cloud Console, create a project (or use an existing one)
+ *      and enable the "Google Calendar API".
+ *   2. Create an API key (Credentials → Create Credentials → API key).
+ *      Restrict it to the Calendar API and, ideally, to your site's domain
+ *      under "Application restrictions" so it can't be reused elsewhere.
+ *   3. Paste the key below as GCAL_API_KEY and redeploy.
+ *
+ * The calendar is already public (it has a working embed/ICS link), so no
+ * further sharing changes are needed. Once a key is set, this script fetches
+ * the next 10 upcoming events straight from Google and replaces the
+ * snapshot list above automatically — the status pill flips to "Live".
+ * If the request fails for any reason (no key yet, bad key, offline), the
+ * snapshot list simply stays visible — visitors never see a broken page.
+ */
+(function(){
+  var GCAL_API_KEY = ''; // <-- paste your Google Calendar API key here
+  var GCAL_CALENDAR_ID = 'cavrpc@gmail.com';
+
+  if (!GCAL_API_KEY) return;
+
+  var liveEl = document.getElementById('liveEvents');
+  var fallbackEl = document.getElementById('fallbackEvents');
+  var livePill = document.getElementById('statusPill');
+  var snapPill = document.getElementById('statusPillSnap');
+
+  function escapeHtml(s){
+    var d = document.createElement('div');
+    d.textContent = s || '';
+    return d.innerHTML;
+  }
+
+  function renderCard(item){
+    var startStr = item.start.dateTime || item.start.date;
+    var allDay = !item.start.dateTime;
+    var d = new Date(startStr);
+    var tz = allDay ? 'UTC' : undefined;
+    var month = d.toLocaleDateString('en-US', { month: 'short', timeZone: tz });
+    var day = d.toLocaleDateString('en-US', { day: 'numeric', timeZone: tz });
+    var time = allDay ? 'All day' : d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+    var loc = item.location ? '<p class="ev-loc">' + escapeHtml(item.location) + '</p>' : '';
+    return '<div class="ev-card">' +
+      '<div class="ev-date"><span class="ev-month">' + month + '</span><span class="ev-day">' + day + '</span></div>' +
+      '<div class="ev-body"><h3>' + escapeHtml(item.summary || 'Untitled event') + '</h3>' +
+      '<p class="ev-time">' + time + '</p>' + loc + '</div></div>';
+  }
+
+  var params = new URLSearchParams({
+    key: GCAL_API_KEY,
+    timeMin: new Date().toISOString(),
+    singleEvents: 'true',
+    orderBy: 'startTime',
+    maxResults: '10'
+  });
+
+  fetch('https://www.googleapis.com/calendar/v3/calendars/' + encodeURIComponent(GCAL_CALENDAR_ID) + '/events?' + params)
+    .then(function(res){ if (!res.ok) throw new Error('Calendar request failed'); return res.json(); })
+    .then(function(data){
+      if (!data.items || !data.items.length) throw new Error('No upcoming events');
+      liveEl.innerHTML = data.items.map(renderCard).join('');
+      liveEl.hidden = false;
+      fallbackEl.hidden = true;
+      livePill.hidden = false;
+      snapPill.hidden = true;
+    })
+    .catch(function(err){
+      console.warn('Live calendar unavailable, showing snapshot instead.', err);
+    });
+})();
+</script>
+</body></html>
